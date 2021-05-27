@@ -42,3 +42,20 @@ Superset of replicaset (resuse definition file)
 Meer info (ander formaat):
 
     k8 get pods --output wide|json|name|yaml
+
+# Namespaces
+
+connect to pod in different namespace: 
+
+    service.namespace.svc.cluster.local
+
+create using command: 
+
+    k8 create .. --namespace=dev
+
+switch to another namespace 
+
+    k8 config set (k8 config current-context) --namespace=dev
+
+# Quota
+
