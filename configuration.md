@@ -39,3 +39,11 @@ In yaml file: ENTRYPOINT is overridden by command en CMD is overridden by args
     envFrom:
         - configMapRef:
             name: configmap
+
+## Secrets
+
+Have to be added base64 encoded: 
+
+    echo -n "secret" | base64
+
+Voorbeeld in pod definition

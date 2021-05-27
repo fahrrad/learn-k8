@@ -1,11 +1,22 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: test-nginx
+  name: busybox-ls
   labels: 
     project: learn_k8
-
 spec:
   containers:
     - name: webserver
-      image: nginx
+      image: busybox
+      volumeMounts:
+      - name: secrets-volume
+        mountPath: "/secrets"
+        readOnly: true
+      command: ["sh", "-c", 'cat /secrets/APP_COLOR && sleep 3600']
+  volumes:
+    - name: configmap-volume
+      configMap:
+        name: configmap
+    - name: secrets-volume
+      secret:
+        secretName: app-secret
