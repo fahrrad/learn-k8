@@ -48,7 +48,7 @@ Have to be added base64 encoded:
 
 Voorbeeld in pod definition
 
-# Security
+## Security
 
     containers:
         securityContext:
@@ -57,7 +57,7 @@ Voorbeeld in pod definition
                 add: ["MAC_ADMIN"]
 
 
-# Service Accounts
+## Service Accounts
 
 kunnen gebruikt worden om de K8 API te queryen. 
 
@@ -91,4 +91,32 @@ dit zorgt ervoor dat een directory gemounted wordt (standaard onder /var/run/sec
     curl --cacert ${CACERT} --header "Authorization: Bearer ${TOKEN}" -X GET ${APISERVER}/api
 
 ```
+
+
+## Resources
+
+Standaard wordt 0.5 CPU and 256 Mi voor een pod vrijgemaakt. Voor meer: 
+
+    containers:
+        ...
+        resources:
+            request:
+                memory: "1Gi"
+                cpu: 1
+            limits:
+                memory: "2Gi"
+                cpu: 2
+
+0.1 = 100m
+256 Mi
+
+CPU is trottled, memory will result in terminate
+
+# Taints and Toleration
+
+Controlleer welke pods _niet_ op welke nodes landen
+
+# Node selector & Affinity
+
+Welke pod landt op welke node
 
