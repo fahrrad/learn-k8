@@ -12,7 +12,7 @@ spec:
       - name: secrets-volume
         mountPath: "/secrets"
         readOnly: true
-      command: ["sh", "-c", 'cat /secrets/APP_COLOR && sleep 3600']
+      command: ["sh", "-c", 'ls /var/run/secrets/kubernetes.io/serviceaccount && sleep 60']
   volumes:
     - name: configmap-volume
       configMap:
@@ -20,3 +20,4 @@ spec:
     - name: secrets-volume
       secret:
         secretName: app-secret
+  serviceAccount: dashboard-sa

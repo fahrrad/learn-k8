@@ -47,3 +47,48 @@ Have to be added base64 encoded:
     echo -n "secret" | base64
 
 Voorbeeld in pod definition
+
+# Security
+
+    containers:
+        securityContext:
+            runAsUser: 1000
+            capabilities:
+                add: ["MAC_ADMIN"]
+
+
+# Service Accounts
+
+kunnen gebruikt worden om de K8 API te queryen. 
+
+Een nieuwe service account kan gemaakt worden
+
+    k8 create serviceaccount dashboard-sa
+
+dan kan die in een pod gebruikt worden door
+
+        serviceAccount: dashboard-sa
+
+dit zorgt ervoor dat een directory gemounted wordt (standaard onder /var/run/secrets/kubernetes.io/serviceaccount) met een token
+
+```
+    # Point to the internal API server hostname
+    APISERVER=https://kubernetes.default.svc
+
+    # Path to ServiceAccount token
+    SERVICEACCOUNT=/var/run/secrets/kubernetes.io/serviceaccount
+
+    # Read this Pod's namespace
+    NAMESPACE=$(cat ${SERVICEACCOUNT}/namespace)
+
+    # Read the ServiceAccount bearer token
+    TOKEN=$(cat ${SERVICEACCOUNT}/token)
+
+    # Reference the internal certificate authority (CA)
+    CACERT=${SERVICEACCOUNT}/ca.crt
+
+    # Explore the API with TOKEN
+    curl --cacert ${CACERT} --header "Authorization: Bearer ${TOKEN}" -X GET ${APISERVER}/api
+
+```
+
