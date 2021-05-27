@@ -18,3 +18,24 @@ Overrides the CMD from the Dockerfile
 In yaml file: ENTRYPOINT is overridden by command en CMD is overridden by args
 
 # Config
+
+## configMap
+
+### create 
+
+    k8 create -f config-map.yml
+
+### refernce 1 value
+
+    env:
+        - name: APP_COLOR
+          valueFrom:
+            configMapKeyRef:
+                name: configmap
+                key: APP_COLOR
+
+### full configmap
+
+    envFrom:
+        - configMapRef:
+            name: configmap

@@ -14,14 +14,16 @@ spec:
         labels: 
           project: learn_k8
           type: webserver
-
       spec:
         containers:
           - name: webserver
             image: nginx
           - name: startup
             image: busybox
-            command: ["sh",  "-c", "ls -al && sleep 3600"]
+            envFrom:
+              - configMapRef:
+                  name: configmap
+            command: ["sh",  "-c", 'echo "Value from configmap:" $APP_COLOR && sleep 3600']
                 
   replicas: 2
   selector:
