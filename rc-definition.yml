@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: frame
+  labels:
+    kind: webserver
+    project: learn_k8
+    owner: ward
+
+spec:
+  template:
+      metadata:
+        name: test-nginx
+        labels: 
+          project: learn_k8
+
+      spec:
+        containers:
+          - name: webserver
+            image: nginx
+  replicas: 2
