@@ -35,3 +35,10 @@
 
 Alles van Replicasets werkt. Grootste verschil is dat de definition.yml een veld 'selector' moet hebben
 
+# Deployment
+
+Superset of replicaset (resuse definition file)
+
+Meer info (ander formaat):
+
+    k8 get pods --output wide|json|name|yaml
