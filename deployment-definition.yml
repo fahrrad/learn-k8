@@ -19,6 +19,10 @@ spec:
         containers:
           - name: webserver
             image: nginx
+          - name: startup
+            image: busybox
+            command: ["sh",  "-c", "ls -al && sleep 3600"]
+                
   replicas: 2
   selector:
     matchLabels:
