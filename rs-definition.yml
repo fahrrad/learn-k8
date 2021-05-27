@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: frame
+  labels:
+    kind: webserver
+    project: learn_k8
+    owner: ward
+
+spec:
+  template:
+      metadata:
+        name: test-nginx
+        labels: 
+          project: learn_k8
+          type: webserver
+
+      spec:
+        containers:
+          - name: webserver
+            image: nginx
+  replicas: 2
+  selector:
+    matchLabels:
+      type: webserver
