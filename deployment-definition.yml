@@ -6,7 +6,6 @@ metadata:
     kind: webserver
     project: learn_k8
     owner: ward
-
 spec:
   template:
       metadata:
